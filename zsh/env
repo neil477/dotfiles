@@ -27,4 +27,4 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...                                                   
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/texbin:/usr/local/mysql/bin:/usr/local/mysql/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin/:/usr/local/git/bin:$HOME/.cabal/bin:/usr/share:/usr/man:/usr/games
+export PATH=/opt/local/bin:/opt/local/sbin:/usr/texbin:/usr/local/mysql/bin:/usr/local/mysql/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin/:/usr/local/git/bin:$HOME/.cabal/bin:/usr/share:/usr/man:/usr/games:/Users/Neil/shscripts
