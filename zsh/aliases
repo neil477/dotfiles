@@ -1,3 +1,4 @@
 alias updatedb='/usr/libexec/locate.updatedb'
 
-alias tabnm='~/shscripts/tabnm.sh'
+alias tabnm='~/bin/dotfiles/scripts/tabnm.sh'
+

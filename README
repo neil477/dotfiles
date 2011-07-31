@@ -1,0 +1,2 @@
+Add to .zshrc in HOME Directory source ~/bin/dotfiles/zshrc
+Add to .emacs files (load "~/bin/dotfiles/dotemacs/init.el")
