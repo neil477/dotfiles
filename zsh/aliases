@@ -2,3 +2,6 @@ alias updatedb='/usr/libexec/locate.updatedb'
 
 alias tabnm='~/bin/dotfiles/scripts/tabnm.sh'
 
+alias mysql=/usr/local/mysql/bin/mysql
+     
+alias mysqladmin=/usr/local/mysql/bin/mysqladmin
