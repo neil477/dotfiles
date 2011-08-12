@@ -1,0 +1,2 @@
+#emacs mode for zshell
+set -o emacs
