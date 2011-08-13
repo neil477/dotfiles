@@ -26,9 +26,9 @@
 ;;(add-to-list 'load-path "/opt/local/var/macports/software/ecb/2.40_2/opt/local/share/emacs/site-lisp")
 ;;(load-file "/opt/local/var/macports/software/cedet/1.0_0/opt/local/share/emacs/site-lisp/common/cedet.el")
 
-(add-to-list 'load-path "~/.emacs.d/dotemacs/cedet-1.0.0")
-(add-to-list 'load-path "~/.emacs.d/dotemacs/ecb-2.402")
-(load-file "~/.emacs.d/dotemacs/cedet-1.0.0/common/cedet.el")
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/cedet-1.0.0")
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/ecb-2.402")
+(load-file "~/bin/dotfiles/dotemacs/cedet-1.0.0/common/cedet.el")
 
 
 (global-ede-mode 1)                      ; Enable the Project management system
@@ -40,8 +40,8 @@
 
 
 ;;(add-to-list 'load-path "/opt/local/var/macports/softwaRe/color-theme-mode.el/6.6.0_0/opt/local/share/emacs/site-lisp/color-theme-6.6.0")
-(add-to-list 'load-path "~/.emacs.d/dotemacs/color-theme-6.6.0")
-(add-to-list 'load-path "~/.emacs.d/dotemacs/zenburn")
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/color-theme-6.6.0")
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/zenburn")
 (require 'color-theme)
 (color-theme-initialize)
 (require 'color-theme-zenburn)
@@ -64,7 +64,7 @@
 
 
 ;;magit
-(add-to-list 'load-path "~/.emacs.d/dotemacs/magit")
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/magit")
 (require 'magit)                                                                                                                                       
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
