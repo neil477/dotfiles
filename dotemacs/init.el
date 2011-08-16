@@ -12,19 +12,17 @@
 ;; stop having to type yes or no and instead just a y or n will suffice
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Line Numbers
+;; (require 'linum)
 
-(require 'linum)
-(line-number-mode 1)
-(column-number-mode 1)  ;; Line numbers on left most column
-(global-linum-mode 1)
-(setq linum-format " %4d ")
+(load-file "~/bin/dotfiles/dotemacs/linum.el")
+  (line-number-mode 1)
+  (column-number-mode 1)  ;; Line numbers on left most column
+  (global-linum-mode 1)
+  (setq linum-format " %4d ")
+  (custom-set-faces
+  '(linum ((t (:foreground "#586e75" :background "#073642")))))
 
-(custom-set-faces
-'(linum ((t (:foreground "#586e75" :background "#073642")))))
-
-;;(add-to-list 'load-path "/opt/local/var/macports/software/cedet/1.0_0/opt/local/share/emacs/site-lisp")
-;;(add-to-list 'load-path "/opt/local/var/macports/software/ecb/2.40_2/opt/local/share/emacs/site-lisp")
-;;(load-file "/opt/local/var/macports/software/cedet/1.0_0/opt/local/share/emacs/site-lisp/common/cedet.el")
 
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/cedet-1.0.0")
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ecb-2.402")
@@ -60,8 +58,6 @@
 ;;keybindings
 (global-set-key (kbd "C-e") 'ecb-activate)
 (global-set-key (kbd "C-c a") 'ecb-deactivate)
-
-
 
 ;;magit
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/magit")
