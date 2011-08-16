@@ -12,32 +12,31 @@
 ;; stop having to type yes or no and instead just a y or n will suffice
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Line Numbers
-;; (require 'linum)
-
+;; Line Numbers - modified version of linum to view line numbers up to current line
 (load-file "~/bin/dotfiles/dotemacs/linum.el")
   (line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column
   (global-linum-mode 1)
   (setq linum-format " %4d ")
   (custom-set-faces
-  '(linum ((t (:foreground "#586e75" :background "#073642")))))
+  '(linum ((t (:foreground "#000000" :background "#00000")))))
 
 
+;;ecb/cedet bulky flabby slow loading shit
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/cedet-1.0.0")
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ecb-2.402")
 (load-file "~/bin/dotfiles/dotemacs/cedet-1.0.0/common/cedet.el")
-
+ 
 
 (global-ede-mode 1)                      ; Enable the Project management system
 (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
 (global-srecode-minor-mode 1)            ; Enable template insertion menu
 
+;;Remove that damned ecb tip of the day
 (require 'ecb)
 (setq ecb-tip-of-the-day nil)
 
-
-;;(add-to-list 'load-path "/opt/local/var/macports/softwaRe/color-theme-mode.el/6.6.0_0/opt/local/share/emacs/site-lisp/color-theme-6.6.0")
+;;Makin emacs look pwettier
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/color-theme-6.6.0")
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/zenburn")
 (require 'color-theme)
@@ -79,6 +78,10 @@
   ;; If there is more than one, they won't work right.
  )
 
-;; create a backup file directory
+;; create a backup file directory dis shit aint workin
 (defun make-backup-file-name (file)
 (concat “~/.emacs.d/emacs_backups/” (file-name-nondirectory file) “~”))
+
+;;highlight current line
+(global-hl-line-mode 1)
+;;(set-face-background 'hl-line "#330") 
