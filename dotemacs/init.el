@@ -19,7 +19,7 @@
   (global-linum-mode 1)
   (setq linum-format " %4d ")
   (custom-set-faces
-  '(linum ((t (:foreground "#000000" :background "#00000")))))
+  '(linum ((t (:foreground "white" :background "black")))))
 
 
 ;;ecb/cedet bulky flabby slow loading shit
