@@ -60,7 +60,7 @@
 
 ;;magit
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/magit")
-(require 'magit)                                                                                                                                       
+(require 'magit)                                     
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -85,3 +85,11 @@
 ;;highlight current line
 (global-hl-line-mode 1)
 ;;(set-face-background 'hl-line "#330") 
+
+
+;;emacs default size
+
+(add-to-list 'default-frame-alist '(left . 0))
+(add-to-list 'default-frame-alist '(top . 0))
+(add-to-list 'default-frame-alist '(height . 70))
+(add-to-list 'default-frame-alist '(width . 120))
