@@ -27,7 +27,7 @@
 (if window-system
     (progn
       (add-to-list 'load-path "~/bin/dotfiles/dotemacs/cedet-1.0.0")
-      (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ecb-2.402")
+      (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ecb-2.402") 
       (load-file "~/bin/dotfiles/dotemacs/cedet-1.0.0/common/cedet.el")
  
 
@@ -99,3 +99,8 @@
 (add-to-list 'default-frame-alist '(top . 0))
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 120))
+
+;;emacs speaks statistics
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
+(load "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
+(require 'ess-site)
