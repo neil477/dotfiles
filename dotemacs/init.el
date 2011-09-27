@@ -19,9 +19,10 @@
   (line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column
   (global-linum-mode 1)
-  (setq linum-format " %4d ")
+  (setq linum-format "%d ")
+  ;;(setq linum-format 'dynamic)
   (custom-set-faces
-  '(linum ((t (:foreground "white" :background "dark green")))))
+  '(linum ((t (:foreground "yellow")))))
 
 ;; ecb/cedet bulky flabby slow loading shit
 (if window-system
@@ -90,7 +91,7 @@
 ;;(concat “~/.emacs.d/emacs_backups/” (file-name-nondirectory file) “~”))
 
 ;;highlight current line
-(global-hl-line-mode 1)
+;;(global-hl-line-mode 1)
 ;;(set-face-background 'hl-line "#330") 
 
 
@@ -104,3 +105,5 @@
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
 (load "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
 (require 'ess-site)
+
+
