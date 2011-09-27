@@ -16,6 +16,7 @@
 
 ;; Line Numbers - modified version of linum to view line numbers up to current line
 (load-file "~/bin/dotfiles/dotemacs/linum.el")
+(load-file "~/bin/dotfiles/dotemacs/linum-off.el")
   (line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column
   (global-linum-mode 1)
@@ -91,7 +92,7 @@
 ;;(concat “~/.emacs.d/emacs_backups/” (file-name-nondirectory file) “~”))
 
 ;;highlight current line
-;;(global-hl-line-mode 1)
+(global-hl-line-mode 1)
 ;;(set-face-background 'hl-line "#330") 
 
 
@@ -105,5 +106,3 @@
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
 (load "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
 (require 'ess-site)
-
-
