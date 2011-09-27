@@ -106,3 +106,13 @@
 (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
 (load "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
 (require 'ess-site)
+
+
+;;turn off that damn bell
+(defun my-bell-function ()
+  (unless (memq this-command
+		'(isearch-abort abort-recursive-edit exit-minibuffer
+              keyboard-quit mwheel-scroll down up next-line previous-line
+              backward-char forward-char))
+    (ding)))
+(setq ring-bell-function 'my-bell-function)
