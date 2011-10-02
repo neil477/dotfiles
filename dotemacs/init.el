@@ -116,3 +116,10 @@
               backward-char forward-char))
     (ding)))
 (setq ring-bell-function 'my-bell-function)
+
+;;-----------REMAPPED KEYS--------------
+
+;;buffer-menu to current window
+(global-set-key "\C-x\C-b" 'buffer-menu)
+
+
