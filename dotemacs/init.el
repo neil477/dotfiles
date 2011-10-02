@@ -123,6 +123,33 @@
     (require 'yasnippet) ;; not yasnippet-bundle
     (yas/initialize)
     (yas/load-directory "~/bin/dotfiles/dotemacs/yasnippet-0.6.1c/snippets")
+
+;;--------------ido mode ------------------------------
+
+(ido-mode 1)
+(ido-everywhere 1)
+(setq ido-enable-flex-matching t)
+
+;; do not confirm a new file or buffer
+(setq confirm-nonexistent-file-or-buffer nil)
+
+;;---------------- ido stuff end -----------------------
+
+
+;;------------ eshell ----------------------
+
+
+(defun eshell/clear ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+
+
+
+;; -----------------------------------------
+
+
+
 ;;-----------REMAPPED KEYS--------------
 
 ;;buffer-menu to current window
