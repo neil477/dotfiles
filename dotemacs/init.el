@@ -123,6 +123,12 @@
     (require 'yasnippet) ;; not yasnippet-bundle
     (yas/initialize)
     (yas/load-directory "~/bin/dotfiles/dotemacs/yasnippet-0.6.1c/snippets")
+
+;;ido mode completions
+(ido-mode 1)
+
+
+
 ;;-----------REMAPPED KEYS--------------
 
 ;;buffer-menu to current window
