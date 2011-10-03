@@ -16,18 +16,20 @@
 
 ;; Line Numbers - modified version of linum to view line numbers up to current line
 (load-file "~/bin/dotfiles/dotemacs/linum.el")
+(load-file "~/bin/dotfiles/dotemacs/linum-off.el")
   (line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column
   (global-linum-mode 1)
-  (setq linum-format " %4d ")
+  (setq linum-format "%d ")
+  ;;(setq linum-format 'dynamic)
   (custom-set-faces
-  '(linum ((t (:foreground "white" :background "dark green")))))
+  '(linum ((t (:foreground "yellow")))))
 
 ;; ecb/cedet bulky flabby slow loading shit
 (if window-system
     (progn
       (add-to-list 'load-path "~/bin/dotfiles/dotemacs/cedet-1.0.0")
-      (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ecb-2.402")
+      (add-to-list 'load-path "~/bin/dotfiles/dotemacs/ecb-2.402") 
       (load-file "~/bin/dotfiles/dotemacs/cedet-1.0.0/common/cedet.el")
  
 
@@ -99,3 +101,58 @@
 (add-to-list 'default-frame-alist '(top . 0))
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 120))
+
+;;emacs speaks statistics
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
+(load "~/bin/dotfiles/dotemacs/ess-5.14/lisp/ess-site")
+(require 'ess-site)
+
+
+;;turn off that damn bell
+(defun my-bell-function ()
+  (unless (memq this-command
+		'(isearch-abort abort-recursive-edit exit-minibuffer
+              keyboard-quit mwheel-scroll down up next-line previous-line
+              backward-char forward-char))
+    (ding)))
+(setq ring-bell-function 'my-bell-function)
+
+;;ya-snippet
+(add-to-list 'load-path
+                  "~/bin/dotfiles/dotemacs/yasnippet-0.6.1c")
+    (require 'yasnippet) ;; not yasnippet-bundle
+    (yas/initialize)
+    (yas/load-directory "~/bin/dotfiles/dotemacs/yasnippet-0.6.1c/snippets")
+
+;;--------------ido mode ------------------------------
+
+(ido-mode 1)
+(ido-everywhere 1)
+(setq ido-enable-flex-matching t)
+
+;; do not confirm a new file or buffer
+(setq confirm-nonexistent-file-or-buffer nil)
+
+;;---------------- ido stuff end -----------------------
+
+
+;;------------ eshell ----------------------
+
+
+(defun eshell/clear ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+
+
+
+;; -----------------------------------------
+
+
+
+;;-----------REMAPPED KEYS--------------
+
+;;buffer-menu to current window
+(global-set-key "\C-x\C-b" 'buffer-menu)
+
+
