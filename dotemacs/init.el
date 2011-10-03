@@ -127,7 +127,7 @@
 ;;--------------ido mode ------------------------------
 
 (ido-mode 1)
-(ido-everywhere 1)
+;;(ido-everywhere 1)
 (setq ido-enable-flex-matching t)
 
 ;; do not confirm a new file or buffer
@@ -156,3 +156,7 @@
 (global-set-key "\C-x\C-b" 'buffer-menu)
 
 
+;;-----------Emacs Debug----------------
+
+;;gimme stack trace showing what function is complaining about the string being nill
+(setq debug-on-error t)
