@@ -160,3 +160,13 @@
 
 ;;gimme stack trace showing what function is complaining about the string being nill
 (setq debug-on-error t)
+
+;; my try at hiding those damne tilda files, but not disabling their
+;; existence
+;; save backup and autosave files in /tmp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+
