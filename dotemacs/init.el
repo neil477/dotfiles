@@ -118,8 +118,7 @@
 (setq ring-bell-function 'my-bell-function)
 
 ;;ya-snippet
-(add-to-list 'load-path
-                  "~/bin/dotfiles/dotemacs/yasnippet-0.6.1c")
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/yasnippet-0.6.1c")
     (require 'yasnippet) ;; not yasnippet-bundle
     (yas/initialize)
     (yas/load-directory "~/bin/dotfiles/dotemacs/yasnippet-0.6.1c/snippets")
@@ -168,5 +167,3 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-
-
