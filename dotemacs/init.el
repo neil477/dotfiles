@@ -14,8 +14,8 @@
 (setq ring-bell-function 'my-bell-function)
 
 ;; Line Numbers - modified version of linum to view line numbers up to current line
-  (load-file "~/.emacs.d/linum.el")
-  (load-file "~/.emacs.d/linum-off.el")
+  (load-file "~/bin/dotfiles/dotemacs/linum.el")
+  (load-file "~/bin/dotfiles/dotemacs/linum-off.el")
   (line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column
   (global-linum-mode 1)
