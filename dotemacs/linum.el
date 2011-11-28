@@ -145,7 +145,7 @@ and you have to scroll or press C-l to update the numbers."
                      (let* ((c (count-lines (point-min) (point-max)))
                             (w (length (number-to-string
                                         (+ c (if empty-line-at-eob 1 0))))))
-                       (concat "%" (number-to-string w) "d")))))
+                       (concat " %" (number-to-string w) "d ")))))
          (width 0))
     (run-hooks 'linum-before-numbering-hook)
     ;; Create an overlay (or reuse an existing one) for each
@@ -162,7 +162,7 @@ and you have to scroll or press C-l to update the numbers."
                               (push o linum-overlays))
                             (setq linum-available (delete o linum-available))
                             (throw 'visited t))))))
-        (setq width (max width (length str)))
+        (setq width (max width (+ (length str) 1)))
         (unless visited
           (let ((ov (if (null linum-available)
                         (make-overlay (point) (point))

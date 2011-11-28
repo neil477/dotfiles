@@ -4,6 +4,9 @@
 ;; stop having to type yes or no and instead just a y or n will suffice
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;;set the cursor type
+(set-default 'cursor-type 'bar)
+
 ;;turn off that damn bell
 (defun my-bell-function ()
   (unless (memq this-command
@@ -107,6 +110,11 @@
 ;;buffer-menu to current window
 (global-set-key "\C-x\C-b" 'buffer-menu)
 
+;;keybindings
+(global-set-key (kbd "C-c e") 'ecb-activate)
+(global-set-key (kbd "C-c a") 'ecb-deactivate)
+
+
 
 ;;-----------Emacs Debug----------------
 
@@ -189,7 +197,7 @@
 	
 	(:name yasnippet
 	       :type elpa)
-       
+
 	))
         
 (setq my-packages
@@ -209,6 +217,21 @@
 ; Need for ECB in emacs 24
 (setq stack-trace-on-error t)
 
-;;keybindings
-(global-set-key (kbd "C-e") 'ecb-activate)
-(global-set-key (kbd "C-c a") 'ecb-deactivate)
+
+;; Start the emacs server
+(server-start)
+
+;;----------------------Obligatory Elisp----------------------------------------------------
+
+
+
+(defun fc-eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (prin1 (eval (read (current-kill 0)))
+         (current-buffer)))
+
+(global-set-key (kbd "C-c x") 'fc-eval-and-replace)
+
+
