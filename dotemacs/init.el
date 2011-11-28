@@ -9,6 +9,8 @@
 
 ;; Line Numbers - modified version of linum to view line numbers up to current line
   (load-file "~/bin/dotfiles/dotemacs/linum.el")
+;; Turn linum mode off for eshell and minor modes
+  (load-file "~/bin/dotfiles/dotemacs/linum-off.el")  
   (line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column1
   (global-linum-mode 1)
