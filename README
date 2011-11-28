@@ -4,8 +4,7 @@ Setup Instructions
 
 2. In your bin directory git clone git@github.com:neil477/dotfiles.git
 
-3.
-  Add to .emacs file:   (load "~/bin/dotfiles/dotemacs/init.el")
+3. Add to .emacs file:   (load "~/bin/dotfiles/dotemacs/init.el")
 
   (Optional) if you want my zshell stuff Add to .zshrc directory in your home folder: source ~/bin/dotfiles/zshrc
   
