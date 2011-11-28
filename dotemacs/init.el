@@ -7,22 +7,11 @@
 ;;set the cursor type
 (set-default 'cursor-type 'bar)
 
-;;turn off that damn bell
-(defun my-bell-function ()
-  (unless (memq this-command
-		'(isearch-abort abort-recursive-edit exit-minibuffer
-              keyboard-quit mwheel-scroll down up next-line previous-line
-              backward-char forward-char))
-    (ding)))
-(setq ring-bell-function 'my-bell-function)
-
 ;; Line Numbers - modified version of linum to view line numbers up to current line
   (load-file "~/bin/dotfiles/dotemacs/linum.el")
-  (load-file "~/bin/dotfiles/dotemacs/linum-off.el")
   (line-number-mode 1)
-  (column-number-mode 1)  ;; Line numbers on left most column
+  (column-number-mode 1)  ;; Line numbers on left most column1
   (global-linum-mode 1)
-  ;;(setq linum-format "%2d ")
   (setq linum-format 'dynamic)
 
 (custom-set-faces
@@ -76,7 +65,6 @@
 
 ;;disable menubar,toolbar,scrollbar
 (menu-bar-mode -1) 
-;;(tool-bar-mode -1) 
 
 (if (functionp 'tool-bar-mode) (tool-bar-mode -1))
 
@@ -113,6 +101,8 @@
 ;;keybindings
 (global-set-key (kbd "C-c e") 'ecb-activate)
 (global-set-key (kbd "C-c a") 'ecb-deactivate)
+
+(global-set-key (kbd "C-h C-f") 'find-function)
 
 
 
