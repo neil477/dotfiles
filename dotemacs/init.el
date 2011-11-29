@@ -243,3 +243,6 @@
 (when window-system
   (global-set-key (kbd "C-x C-c") 'ask-before-closing))
 
+;;turn the alarm bell off without enabling visual bell
+(setq ring-bell-function 'ignore)
+
