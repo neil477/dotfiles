@@ -52,10 +52,12 @@
 
 ;; Disable fringes ie the big ass margin separator
 ;; notice this if statement detects if you're in gui mode
+;; Start the emacs server
 (if window-system
     (progn
       (scroll-bar-mode -1)
-       (fringe-mode 0)))
+       (fringe-mode 0)
+       (server-start)))
 
 (set-face-attribute 'default nil :height 140)
 
@@ -208,10 +210,6 @@
 
 ; Need for ECB in emacs 24
 (setq stack-trace-on-error t)
-
-
-;; Start the emacs server
-(server-start)
 
 ;;----------------------Obligatory Elisp----------------------------------------------------
 
