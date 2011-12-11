@@ -28,3 +28,6 @@ export PATH="$HOME/Library/Haskell/bin:$PATH"
 # rvm stuff
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
+#export TERM="xterm-256"
+export USERWM=`which xmonad`
+
