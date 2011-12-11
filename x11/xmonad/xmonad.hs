@@ -2,6 +2,6 @@ import XMonad
 
 main = xmonad defaultConfig
         { modMask = mod1Mask,
-	terminal = "xterm",
+	terminal = "urxvt",
 	focusedBorderColor = "green"
         }
