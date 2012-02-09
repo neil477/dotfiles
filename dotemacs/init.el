@@ -1,6 +1,10 @@
 ;; Require CL
 (require 'cl)
 
+
+;;setup load-path
+(add-to-list 'load-path "~/bin/dotfiles/dotemacs/")
+
 ;;Remove annoying splash screen
 (setq inhibit-splash-screen t)
 
@@ -10,8 +14,34 @@
 ;;set the cursor type
 (set-default 'cursor-type 'bar)
 
+; assign a list to a var
+ (setq myList '(" \"Difficulty's An Excuse \n K'naan \"" "\"You never know when your opportunity is gonna stop...you don't if something happens you may never get that chance again. So when you do have that opportunity you wanna take advantage of it. Thats where I learned how to work hard.\" Jeremy Lin " " \"The biggest thing for you is to do more than just practice with your team. If you're not a good shooter, for me I struggled with my shots so after practise, in the morning, sometimes at midnight I would work on my weaknesses. Find time to work on your game and your weaknesses. \" Jeremy Lin" ))
+
+(setq Rmessage (nth (random 3) myList)) 
+
 ;;inhibit scratch message
-(setq initial-scratch-message "")
+(setq initial-scratch-message (concat ";;" Rmessage))
+
+
+
+;;useful stuff from screencast -- http://www.youtube.com/watch?v=a-jRN_ba41w
+
+;;show paren-mode
+(show-paren-mode t)
+
+;;transient mark mode
+(setq transient-mark-mode t)
+
+;;load smart tabs stolen from https://github.com/rmm5t
+;;(load "tabs")
+
+;;hippie mode ToDo
+;;(global-set-key (kbd "TAB") 'hippie-expand)
+
+
+
+
+;;--------------------------------------------------------------------------------
 
 ;;remember recent files
 (require 'recentf)
@@ -131,8 +161,30 @@
 (global-set-key (kbd "C-c C-s") 'eshell)
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
-(global-set-key (kbd "C-x C-k") 'kill-region)
+(global-set-key (kbd "C-c C-k") 'kill-region)
 (global-set-key (kbd "C-c \\") 'balance-windows)
+
+
+
+;;from http://www.youtube.com/watch?v=a-jRN_ba41w
+
+;; map the window manipulation keys to meta 0, 1, 2, o
+(global-set-key (kbd "M-3") 'split-window-horizontally) ; was digit-argument
+(global-set-key (kbd "M-2") 'split-window-vertically) ; was digit-argument
+(global-set-key (kbd "M-1") 'delete-other-windows) ; was digit-argument
+(global-set-key (kbd "M-0") 'delete-window) ; was digit-argument
+(global-set-key (kbd "M-o") 'other-window) ; was facemenu-keymap
+
+
+;; To help Unlearn C-x 0, 1, 2, o
+(global-unset-key (kbd "C-x 3")) ; was split-window-horizontally
+(global-unset-key (kbd "C-x 2")) ; was split-window-vertically
+(global-unset-key (kbd "C-x 1")) ; was delete-other-windows
+(global-unset-key (kbd "C-x 0")) ; was delete-window
+(global-unset-key (kbd "C-x o")) ; was other-window
+
+
+
 
 
 ;;-----------Emacs Debug----------------
@@ -206,11 +258,6 @@
                :url "https://github.com/eschulte/rhtml.git"
                :features rhtml-mode
 	       :after (lambda () (rhtml-mode-hook)))
-        (:name textmate
-               :type git
-               :url "git://github.com/defunkt/textmate.el"
-               :load "textmate.el")
-
 	(:name ecb_snap
                :type elpa)
 	
@@ -296,15 +343,17 @@
 
 ;;;==================== Window Management ===========================================
 
-(global-set-key (kbd "C-c <up>") 'windmove-up)
-(global-set-key (kbd "C-c <down>") 'windmove-down)
-(global-set-key (kbd "C-c <right>") 'windmove-right)
-(global-set-key (kbd "C-c <left>") 'windmove-left)
+(global-set-key (kbd "M-<up>") 'windmove-up)
+(global-set-key (kbd "M-<down>") 'windmove-down)
+(global-set-key (kbd "M-<right>") 'windmove-right)
+(global-set-key (kbd "M-<left>") 'windmove-left)
 
 
-;;----------debugger-------------
+;;----------Debugger-------------
  (setq debug-on-error nil)
 
+
+;;measure time to startup emacs
 (defvar *emacs-load-start* (current-time))
 
 (message "My .emacs loaded in %dms" (destructuring-bind (hi lo ms) (current-time)
@@ -319,4 +368,3 @@
 (setq eshell-prompt-function (lambda nil (concat (abbreviate-file-name (eshell/pwd)) "\n ϟ ")))
 
 (setq eshell-prompt-regexp "^[^ϟ]* [ϟ] ")
-
