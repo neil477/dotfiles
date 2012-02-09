@@ -6,15 +6,13 @@ Setup Instructions
 
 3. Add to .emacs file:   (load "~/bin/dotfiles/dotemacs/init.el")
 
-  (Optional) if you want my zshell stuff Add to .zshrc directory in your home folder: source ~/bin/dotfiles/zshrc
+  (Optional) if you want my zshell stuff Add to .zshrc directory in your home folder: source ~/bin/dotfiles/zshrc.sh
   
 
 4. In your .emacs.d folder: git clone https://github.com/dimitri/el-get.git
 
 5. Startup emacs and it should be should be glorious
 
-
-Make Emacs Your Own:
 
 E.g. Change Theme
 
@@ -23,5 +21,3 @@ change zenburn to some other cool themes: currently I have solarized-light-theme
 to zenburn, but plan to add more. you can add your own theme just make sure you put it in the themes directory in 
 the dotemacs folder. Follow the name-theme.el convention, and reference it truncating the -theme.el suffix when you 
 load it. i.e. zenburn-theme.el in the themes directory is loaded by calling '(load-theme zenburn)
-
-2. Do other cool stuff that I know not about, and tell me.
