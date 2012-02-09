@@ -1,3 +1,6 @@
+;; Require CL
+(require 'cl)
+
 ;;Remove annoying splash screen
 (setq inhibit-splash-screen t)
 
@@ -6,6 +9,16 @@
 
 ;;set the cursor type
 (set-default 'cursor-type 'bar)
+
+;;inhibit scratch message
+(setq initial-scratch-message "")
+
+;;remember recent files
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
 
 ;; Line Numbers - modified version of linum to view line numbers up to current line
   (load-file "~/bin/dotfiles/dotemacs/linum.el")
@@ -24,7 +37,7 @@
  '(linum ((t (:foreground "yellow")))))
 
 ;;package manager stuff
-(require 'package)
+(require 'package);
 ;; Add the original Emacs Lisp Package Archive
 (add-to-list 'package-archives
              '("elpa" . "http://tromey.com/elpa/"))
@@ -48,7 +61,7 @@
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2)))
 
 ;;load theme DONT PUT IN "-theme" part of name 
-(load-theme 'zenburn)
+(load-theme 'test4 t)
 
 ;; Disable fringes ie the big ass margin separator
 ;; notice this if statement detects if you're in gui mode
@@ -99,15 +112,27 @@
 
 ;;-----------REMAPPED KEYS--------------
 
+
+(setq mac-option-key-is-meta nil)
+;;rebind meta to control
+(setq mac-command-key-is-meta t)
+
+
 ;;buffer-menu to current window
 (global-set-key "\C-x\C-b" 'buffer-menu)
 
 ;;keybindings
 (global-set-key (kbd "C-c e") 'ecb-activate)
-(global-set-key (kbd "C-c a") 'ecb-deactivate)
+(global-set-key (kbd "C-c d") 'ecb-deactivate)
 
 (global-set-key (kbd "C-h C-f") 'find-function)
-
+(global-set-key (kbd "C-c C-w") 'kill-buffer-and-window)
+(global-set-key (kbd "C-c C-e") 'eval-buffer)
+(global-set-key (kbd "C-c C-s") 'eshell)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-x C-k") 'kill-region)
+(global-set-key (kbd "C-x C-k") 'kill-region)
+(global-set-key (kbd "C-c \\") 'balance-windows)
 
 
 ;;-----------Emacs Debug----------------
@@ -243,4 +268,55 @@
 
 ;;turn the alarm bell off without enabling visual bell
 (setq ring-bell-function 'ignore)
+
+
+;; visual line mode enables word wrapping
+(visual-line-mode 1)
+
+
+;;------------------ Org Mode ------------------------------------------------------------
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(setq org-log-done t)
+
+(setq org-agenda-files (list "~/Dropbox/test.org"))
+
+
+;;-------------------erc------------------------------------------------------------------
+
+;; (setq erc-prompt-for-nickserv-password nil)
+;; (setq erc-nickserv-identify-mode 'autodetect)
+;; (load "~/.emacs.d/.erc-auth.el") ; erc-password
+;; (setq erc-prompt-for-nickserv-password nil)
+;; (erc :server "irc.freenode.net" :nick erc-username  :password erc-password)
+;; (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#erc" "#python"))))
+
+
+;;;==================== Window Management ===========================================
+
+(global-set-key (kbd "C-c <up>") 'windmove-up)
+(global-set-key (kbd "C-c <down>") 'windmove-down)
+(global-set-key (kbd "C-c <right>") 'windmove-right)
+(global-set-key (kbd "C-c <left>") 'windmove-left)
+
+
+;;----------debugger-------------
+ (setq debug-on-error nil)
+
+(defvar *emacs-load-start* (current-time))
+
+(message "My .emacs loaded in %dms" (destructuring-bind (hi lo ms) (current-time)
+                             (- (+ hi lo) (+ (first *emacs-load-start*) (second
+                             *emacs-load-start*)))))
+
+
+;; eshell
+
+(setq eshell-banner-message "")
+
+(setq eshell-prompt-function (lambda nil (concat (abbreviate-file-name (eshell/pwd)) "\n ϟ ")))
+
+(setq eshell-prompt-regexp "^[^ϟ]* [ϟ] ")
 

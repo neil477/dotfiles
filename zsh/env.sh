@@ -10,6 +10,8 @@ export ZSH_THEME="weatherby"
 # Set to this to use case-sensitive completion                                 
 # export CASE_SENSITIVE="true"                                                  
 
+export DISABLE_AUTO_UPDATE="true"
+
 # Disable autosetting terminal title.   
 export DISABLE_AUTO_TITLE="true"
 
@@ -20,7 +22,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...                                                   
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/usr/texbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin/:/usr/local/git/bin:$HOME/.cabal/bin:/usr/share:/usr/man:/usr/games:/usr/local/bin:/usr/local/sbin
+export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/usr/texbin:/bin:/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/bin/:/usr/local/git/bin:$HOME/.cabal/bin:/usr/share:/usr/man:/usr/games:/usr/local/sbin
 
 # for cabal
 export PATH="$HOME/Library/Haskell/bin:$PATH"
