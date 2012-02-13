@@ -14,13 +14,23 @@
 ;;set the cursor type
 (set-default 'cursor-type 'bar)
 
-; assign a list to a var
- (setq myList '(" \"Difficulty's An Excuse \n K'naan \"" "\"You never know when your opportunity is gonna stop...you don't if something happens you may never get that chance again. So when you do have that opportunity you wanna take advantage of it. Thats where I learned how to work hard.\" Jeremy Lin " " \"The biggest thing for you is to do more than just practice with your team. If you're not a good shooter, for me I struggled with my shots so after practise, in the morning, sometimes at midnight I would work on my weaknesses. Find time to work on your game and your weaknesses. \" Jeremy Lin" ))
+;;my first elisp
+;;(load "scratchquotes")
 
-(setq Rmessage (nth (random 3) myList)) 
+; assign a list to a var
+ ;; (setq myList '(" \"Difficulty's An Excuse \n K'naan \"" "\"You never know when your opportunity is gonna stop...you don't if something happens you may never get that chance again. So when you do have that opportunity you wanna take advantage of it. Thats where I learned how to work hard.\" Jeremy Lin " " \"The biggest thing for you is to do more than just practice with your team. If you're not a good shooter, for me I struggled with my shots so after practise, in the morning, sometimes at midnight I would work on my weaknesses. Find time to work on your game and your weaknesses. \" Jeremy Lin" ))
+
+;; (setq Rmessage (nth (random 3) myList)) 
+
+
+;; (setq file "~/bin/dotfiles/dotemacs/quotes")
+
+;; (setq Rmessage (processfile file))
+
+
 
 ;;inhibit scratch message
-(setq initial-scratch-message (concat ";;" Rmessage))
+;;(setq initial-scratch-message (concat ";;" Rmessage))
 
 
 
@@ -91,7 +101,7 @@
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2)))
 
 ;;load theme DONT PUT IN "-theme" part of name 
-(load-theme 'test4 t)
+(load-theme 'zenburn t)
 
 ;; Disable fringes ie the big ass margin separator
 ;; notice this if statement detects if you're in gui mode
