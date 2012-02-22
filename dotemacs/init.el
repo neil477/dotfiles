@@ -193,13 +193,17 @@
 (global-unset-key (kbd "C-x 0")) ; was delete-window
 (global-unset-key (kbd "C-x o")) ; was other-window
 
-
+;; speed i need speed
 (global-set-key (kbd "C-<right>") 'next-buffer)
-(global-set-key (kbd "C-<left>") 'previous-buffer) 
+(global-set-key (kbd "C-<left>") 'previous-buffer)
+(global-set-key (kbd "M-k") 'delete-current-buffer)
 
 ;; Unlearn switch buffers
-;;(global-unset-key (kbd "C-x <right>"))
-;;(global-unset-key (kbd "C-x <left>"))
+(global-unset-key (kbd "C-x <right>"))
+(global-unset-key (kbd "C-x <left>"))
+
+
+(defun delete-current-buffer () (interactive) (kill-buffer (current-buffer)))
 
 
 
