@@ -3,7 +3,7 @@
 
 
 ;;setup load-path
-(add-to-list 'load-path "~/bin/dotfiles/dotemacs/")
+(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/")
 
 ;;Remove annoying splash screen
 (setq inhibit-splash-screen t)
@@ -23,7 +23,7 @@
 ;; (setq Rmessage (nth (random 3) myList)) 
 
 
-;; (setq file "~/bin/dotfiles/dotemacs/quotes")
+;; (setq file "~/Dropbox/bin/dotfiles/dotemacs/quotes")
 
 ;; (setq Rmessage (processfile file))
 
@@ -61,9 +61,9 @@
 
 
 ;; Line Numbers - modified version of linum to view line numbers up to current line
-  (load-file "~/bin/dotfiles/dotemacs/linum.el")
+  (load-file "~/Dropbox/bin/dotfiles/dotemacs/linum.el")
 ;; Turn linum mode off for eshell and minor modes
-  (load-file "~/bin/dotfiles/dotemacs/linum-off.el")  
+  (load-file "~/Dropbox/bin/dotfiles/dotemacs/linum-off.el")  
   (line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column1
   (global-linum-mode 1)
@@ -94,7 +94,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-theme-load-path (quote ("~/bin/dotfiles/dotemacs/themes")))
+ '(custom-theme-load-path (quote ("~/Dropbox/bin/dotfiles/dotemacs/themes")))
  '(custom-safe-themes (quote ("e9704e8b957e4151cd570c5f25ec81c297aa2b6a" "517aecb1202bfa31fd3c44473d72483c5166124d" default)))
  '(ecb-layout-name "left13")
  '(ecb-options-version "2.40")
