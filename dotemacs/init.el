@@ -194,6 +194,14 @@
 (global-unset-key (kbd "C-x o")) ; was other-window
 
 
+(global-set-key (kbd "C-<right>") 'next-buffer)
+(global-set-key (kbd "C-<left>") 'previous-buffer) 
+
+;; Unlearn switch buffers
+;;(global-unset-key (kbd "C-x <right>"))
+;;(global-unset-key (kbd "C-x <left>"))
+
+
 
 
 
