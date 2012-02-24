@@ -5,6 +5,10 @@
 ;;setup load-path
 (add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/")
 
+;;load osx specific stuff
+(load-file "~/Dropbox/bin/dotfiles/dotemacs/osxstuff.el")
+
+
 ;;Remove annoying splash screen
 (setq inhibit-splash-screen t)
 
