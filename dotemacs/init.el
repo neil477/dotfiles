@@ -1,7 +1,6 @@
 ;; Require CL
 (require 'cl)
 
-
 ;;setup load-path
 (add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/")
 
@@ -114,7 +113,8 @@
     (progn
       (scroll-bar-mode -1)
        (fringe-mode 0)
-       (server-start)))
+       (server-start)
+       (ansi-term "/bin/zsh" "console")))
 
 (set-face-attribute 'default nil :height 140)
 
@@ -143,12 +143,17 @@
 ;;------------ eshell ----------------------
 
 
-(defun eshell/clear ()
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
+;; (defun eshell/clear ()
+;;   (interactive)
+;;   (let ((inhibit-read-only t))
+;;     (erase-buffer)))
 
-
+(defun clear-shell ()
+   (interactive)
+   (let ((old-max comint-buffer-maximum-size))
+     (setq comint-buffer-maximum-size 0)
+     (comint-truncate-buffer)
+     (setq comint-buffer-maximum-size (+ 1 old-max))))
 
 ;; -----------------------------------------
 
@@ -394,3 +399,6 @@
 (setq eshell-prompt-function (lambda nil (concat (abbreviate-file-name (eshell/pwd)) "\n ϟ ")))
 
 (setq eshell-prompt-regexp "^[^ϟ]* [ϟ] ")
+
+;; Use Emacs terminfo, not system terminfo
+(setq system-uses-terminfo nil)
