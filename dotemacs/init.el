@@ -31,11 +31,17 @@
 ;; (setq Rmessage (processfile file))
 
 
+;; enable universal clipboard
+(setq x-select-enable-clipboard t)
+
 
 ;;inhibit scratch message
 ;;(setq initial-scratch-message (concat ";;" Rmessage))
 
-
+;;kill process i dont care if u do
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
 
 ;;useful stuff from screencast -- http://www.youtube.com/watch?v=a-jRN_ba41w
 
@@ -114,7 +120,7 @@
       (scroll-bar-mode -1)
        (fringe-mode 0)
        (server-start)
-       (ansi-term "/bin/zsh" "console")))
+       (if  (eq nil (get-buffer "console")) (ansi-term "/bin/zsh" "console"))))
 
 (set-face-attribute 'default nil :height 140)
 
@@ -184,6 +190,24 @@
 (global-set-key (kbd "C-c \\") 'balance-windows)
 
 
+(defun next-buff ()
+  "In selected window switch to next buffer."
+  (interactive)
+  (if (window-minibuffer-p)
+      (error "Cannot switch buffers in minibuffer window"))
+  (switch-to-next-buffer)
+
+  (if (or (string-equal (buffer-name) "*Messages*") (string-equal (buffer-name) "*scratch*")) (next-buff)))
+
+(defun prev-buff ()
+  "In selected window switch to previous buffer."
+  (interactive)
+  (if (window-minibuffer-p)
+      (error "Cannot switch buffers in minibuffer window"))
+  (switch-to-prev-buffer)
+    (if (or (string-equal (buffer-name) "*Messages*") (string-equal (buffer-name) "*scratch*")) (progn (message "test") (prev-buff))))
+
+
 
 ;;from http://www.youtube.com/watch?v=a-jRN_ba41w
 
@@ -203,8 +227,8 @@
 (global-unset-key (kbd "C-x o")) ; was other-window
 
 ;; speed i need speed
-(global-set-key (kbd "C-<right>") 'next-buffer)
-(global-set-key (kbd "C-<left>") 'previous-buffer)
+(global-set-key (kbd "C-<right>") 'next-buff)
+(global-set-key (kbd "C-<left>") 'prev-buff)
 (global-set-key (kbd "M-k") 'delete-current-buffer)
 
 ;; Unlearn switch buffers
@@ -402,3 +426,18 @@
 
 ;; Use Emacs terminfo, not system terminfo
 (setq system-uses-terminfo nil)
+
+
+;; advice function - look into how these work
+ (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+        "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+        (flet ((process-list ())) ad-do-it))
+
+
+(defun save-current-file-path ()
+  "Save the current file path in the kill-ring"
+  (interactive)
+  (message (buffer-file-name))
+  (kill-new (buffer-file-name)))
+
+(global-set-key (kbd "M-p") 'save-current-file-path)
