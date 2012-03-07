@@ -70,20 +70,20 @@
 
 
 ;; Line Numbers - modified version of linum to view line numbers up to current line
-  (load-file "~/Dropbox/bin/dotfiles/dotemacs/linum.el")
+(load-file "~/Dropbox/bin/dotfiles/dotemacs/linum.el")
 ;; Turn linum mode off for eshell and minor modes
-  (load-file "~/Dropbox/bin/dotfiles/dotemacs/linum-off.el")  
-  (line-number-mode 1)
+(load-file "~/Dropbox/bin/dotfiles/dotemacs/linum-off.el")  
+  ;;(line-number-mode 1)
   (column-number-mode 1)  ;; Line numbers on left most column1
   (global-linum-mode 1)
-  (setq linum-format 'dynamic)
+  ;;(setq linum-format 'dynamic)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(linum ((t (:foreground "yellow")))))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(linum ((t (:foreground "yellow")))))
 
 ;;package manager stuff
 (require 'package);
@@ -120,7 +120,7 @@
       (scroll-bar-mode -1)
        (fringe-mode 0)
        (server-start)
-       (if  (eq nil (get-buffer "console")) (ansi-term "/bin/zsh" "console"))))
+       (if  (eq nil (get-buffer "*console*")) (ansi-term "/bin/zsh" "console"))))
 
 (set-face-attribute 'default nil :height 140)
 
@@ -135,10 +135,13 @@
 
 (if (functionp 'tool-bar-mode) (tool-bar-mode -1))
 
+
+ ;; (set-face-background 'linum nil :background "#CCC")
+
 ;;--------------ido mode ------------------------------
 
 (ido-mode 1)
-;;(ido-everywhere 1)
+(ido-everywhere 1)
 (setq ido-enable-flex-matching t)
 
 ;; do not confirm a new file or buffer
@@ -160,6 +163,11 @@
      (setq comint-buffer-maximum-size 0)
      (comint-truncate-buffer)
      (setq comint-buffer-maximum-size (+ 1 old-max))))
+
+(add-hook 'term-exec-hook
+          (function
+           (lambda ()
+             (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
 
 ;; -----------------------------------------
 
@@ -441,3 +449,8 @@
   (kill-new (buffer-file-name)))
 
 (global-set-key (kbd "M-p") 'save-current-file-path)
+
+;; (substitute-key-definition
+;;            'quit-window '(lambda () (interactive) (quit-window "KILL")) global-map)
+
+ ;; (substitute-key-definition 'kill-current-buffer 'kill-buffer map global-map)
