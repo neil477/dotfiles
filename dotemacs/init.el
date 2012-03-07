@@ -1,3 +1,8 @@
+(add-hook 'term-exec-hook
+          (function
+           (lambda ()
+             (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
 ;; Require CL
 (require 'cl)
 
@@ -164,10 +169,7 @@
      (comint-truncate-buffer)
      (setq comint-buffer-maximum-size (+ 1 old-max))))
 
-(add-hook 'term-exec-hook
-          (function
-           (lambda ()
-             (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
 
 ;; -----------------------------------------
 
@@ -191,7 +193,7 @@
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key (kbd "C-c C-w") 'kill-buffer-and-window)
 (global-set-key (kbd "C-c C-e") 'eval-buffer)
-(global-set-key (kbd "C-c C-s") 'eshell)
+(global-set-key (kbd "C-c C-s") '(lambda () (interactive) (ansi-term "/bin/zsh")))
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "C-c C-k") 'kill-region)
