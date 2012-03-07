@@ -4,3 +4,4 @@
 *.swp
 *.out
 *.elc
+dotemacs.el
