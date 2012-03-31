@@ -215,7 +215,7 @@
   (if (window-minibuffer-p)
       (error "Cannot switch buffers in minibuffer window"))
   (switch-to-prev-buffer)
-    (if (or (string-equal (buffer-name) "*Messages*") (string-equal (buffer-name) "*scratch*")) (progn (message "test") (prev-buff))))
+    (if (or (string-equal (buffer-name) "*Messages*") (string-equal (buffer-name) "*scratch*")) (prev-buff)))
 
 
 
@@ -328,6 +328,10 @@
 	
 	(:name yasnippet
 	       :type elpa)
+	
+	(:name anything
+	       :type git
+	       :url "git://repo.or.cz/anything-config.git")
 
 	))
         
@@ -378,6 +382,7 @@
 (when window-system
   (global-set-key (kbd "C-x C-c") 'ask-before-closing))
 
+;; TODO unobtrusive bell in modeline
 ;;turn the alarm bell off without enabling visual bell
 (setq ring-bell-function 'ignore)
 
@@ -412,11 +417,6 @@
 (global-set-key (kbd "M-<down>") 'windmove-down)
 (global-set-key (kbd "M-<right>") 'windmove-right)
 (global-set-key (kbd "M-<left>") 'windmove-left)
-
-
-;;----------Debugger-------------
- (setq debug-on-error nil)
-
 
 ;;measure time to startup emacs
 (defvar *emacs-load-start* (current-time))
@@ -456,3 +456,55 @@
 ;;            'quit-window '(lambda () (interactive) (quit-window "KILL")) global-map)
 
  ;; (substitute-key-definition 'kill-current-buffer 'kill-buffer map global-map)
+
+
+;; dired
+(setq dired-listing-switches "-alh")
+
+(add-hook 'dired-load-hook
+            (function (lambda () (load "dired-x"))))
+
+(require 'dired-x)
+(setq dired-omit-files "^\\...+$")
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+
+;;anything.el
+
+(add-to-list 'load-path "~/.emacs.d/el-get/anything")
+(require 'anything-match-plugin)
+(require 'anything-config)
+
+
+;;pdf
+(setq auto-mode-alist (cons '("\\.pdf$" . doc-view-mode) auto-mode-alist))
+(setq exec-path (append exec-path '("/usr/local/bin/gs")))
+
+
+(defun quit-and-kill-window()
+ "quit and kill window"  
+ (interactive)
+ (quit-window "KILL"))
+
+(load-file "~/Dropbox/bin/dotfiles/dotemacs/window.el")
+
+
+;;add unix newline to end of file
+(setq require-final-newline t)
+
+
+;;delete buffer and file
+(defun delete-this-buffer-and-file ()
+  "Removes file connected to current buffer and kills buffer."
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (buffer (current-buffer))
+        (name (buffer-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (error "Buffer '%s' is not visiting a file!" name)
+      (when (yes-or-no-p "Are you sure you want to remove this file? ")
+        (delete-file filename)
+        (kill-buffer buffer)
+        (message "File '%s' successfully removed" filename)))))
+
+(global-set-key (kbd "C-c k") 'delete-this-buffer-and-file)
