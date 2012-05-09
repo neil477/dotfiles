@@ -239,11 +239,18 @@
 ;; speed i need speed
 (global-set-key (kbd "C-<right>") 'next-buff)
 (global-set-key (kbd "C-<left>") 'prev-buff)
-(global-set-key (kbd "M-k") 'delete-current-buffer)
+(global-set-key (kbd "M-k") 'kill-this-buffer)
+
+;; unbind cmd-k
+(global-unset-key (kbd "s-k"))
 
 ;; Unlearn switch buffers
 (global-unset-key (kbd "C-x <right>"))
 (global-unset-key (kbd "C-x <left>"))
+
+
+
+
 
 
 (defun delete-current-buffer () (interactive) (kill-buffer (current-buffer)))
