@@ -5,7 +5,7 @@ export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.                                               
-export ZSH_THEME="robbyrussell"
+export ZSH_THEME="weatherby"
 
 # Set to this to use case-sensitive completion                                 
 # export CASE_SENSITIVE="true"                                                  
