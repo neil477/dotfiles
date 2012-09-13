@@ -1,17 +1,25 @@
-(add-hook 'term-exec-hook
-          (function
-           (lambda ()
-             (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
-
 ;; Require CL
 (require 'cl)
 
 ;;setup load-path
-(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/")
+(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs")
+(cd "~/Dropbox/bin/dotfiles/dotemacs")
+(load "subdirs.el")
+(cd "~")
+
+
+(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/site-lisp")
+(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/site-lisp/el-get")
+(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/lisp")
 
 ;;load osx specific stuff
-(load-file "~/Dropbox/bin/dotfiles/dotemacs/osxstuff.el")
+;;(load-file "~/Dropbox/bin/dotfiles/dotemacs/osxstuff.el")
+(require 'osxstuff.el)
 
+
+;;term stuff
+;;(load-file "~/Dropbox/bin/dotfiles/dotemacs/ansi-term.el")
+(require 'ansi-term.el)
 
 ;;Remove annoying splash screen
 (setq inhibit-splash-screen t)
@@ -22,26 +30,8 @@
 ;;set the cursor type
 (set-default 'cursor-type 'bar)
 
-;;my first elisp
-;;(load "scratchquotes")
-
-; assign a list to a var
- ;; (setq myList '(" \"Difficulty's An Excuse \n K'naan \"" "\"You never know when your opportunity is gonna stop...you don't if something happens you may never get that chance again. So when you do have that opportunity you wanna take advantage of it. Thats where I learned how to work hard.\" Jeremy Lin " " \"The biggest thing for you is to do more than just practice with your team. If you're not a good shooter, for me I struggled with my shots so after practise, in the morning, sometimes at midnight I would work on my weaknesses. Find time to work on your game and your weaknesses. \" Jeremy Lin" ))
-
-;; (setq Rmessage (nth (random 3) myList)) 
-
-
-;; (setq file "~/Dropbox/bin/dotfiles/dotemacs/quotes")
-
-;; (setq Rmessage (processfile file))
-
-
 ;; enable universal clipboard
 (setq x-select-enable-clipboard t)
-
-
-;;inhibit scratch message
-;;(setq initial-scratch-message (concat ";;" Rmessage))
 
 ;;kill process i dont care if u do
 (setq kill-buffer-query-functions
@@ -62,9 +52,6 @@
 ;;hippie mode ToDo
 ;;(global-set-key (kbd "TAB") 'hippie-expand)
 
-
-
-
 ;;--------------------------------------------------------------------------------
 
 ;;remember recent files
@@ -73,22 +60,13 @@
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-
 ;; Line Numbers - modified version of linum to view line numbers up to current line
-(load-file "~/Dropbox/bin/dotfiles/dotemacs/linum.el")
+;;(require 'linum-mode)
+
 ;; Turn linum mode off for eshell and minor modes
-(load-file "~/Dropbox/bin/dotfiles/dotemacs/linum-off.el")  
-  ;;(line-number-mode 1)
+(require 'linum-off)  
   (column-number-mode 1)  ;; Line numbers on left most column1
   (global-linum-mode 1)
-  ;;(setq linum-format 'dynamic)
-
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(linum ((t (:foreground "yellow")))))
 
 ;;package manager stuff
 (require 'package);
@@ -100,15 +78,11 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-(add-to-list 'load-path "~/.emacs.d/el-get")
-(require 'el-get)
+(add-to-list 'custom-theme-load-path "~/Dropbox/bin/dotfiles/dotemacs/themes")
+
+(add-to-list 'custom-theme-load-path  "~/Dropbox/bin/dotfiles/dotemacs/themes/tomorrow-theme")
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-theme-load-path (quote ("~/Dropbox/bin/dotfiles/dotemacs/themes")))
  '(custom-safe-themes (quote ("e9704e8b957e4151cd570c5f25ec81c297aa2b6a" "517aecb1202bfa31fd3c44473d72483c5166124d" default)))
  '(ecb-layout-name "left13")
  '(ecb-options-version "2.40")
@@ -116,6 +90,9 @@
 
 ;;load theme DONT PUT IN "-theme" part of name 
 (load-theme 'zenburn t)
+
+(setq server-host (system-name)
+                server-use-tcp t)
 
 ;; Disable fringes ie the big ass margin separator
 ;; notice this if statement detects if you're in gui mode
@@ -140,9 +117,6 @@
 
 (if (functionp 'tool-bar-mode) (tool-bar-mode -1))
 
-
- ;; (set-face-background 'linum nil :background "#CCC")
-
 ;;--------------ido mode ------------------------------
 
 (ido-mode 1)
@@ -152,15 +126,26 @@
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
 
-;;---------------- ido stuff end -----------------------
+;; http://www.emacswiki.org/cgi-bin/wiki/InteractivelyDoThings
+(setq ido-save-directory-list-file "~/Dropbox/.emacs.d/cache/ido.last"
+      ido-ignore-buffers ;; ignore these guys
+      '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace" "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+      ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
+      ido-case-fold  t                 ; be case-insensitive
+      
+      ido-enable-last-directory-history t ; remember last used dirs
+      ido-max-work-directory-list 30   ; should be enough
+      ido-max-work-file-list      50   ; remember many
+      ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+      ido-use-url-at-point nil         ; don't use url at point (annoying
+      ido-enable-flex-matching nil     ; don't try to be too smart
+      ido-max-prospects 8              ; don't spam my minibuffer
+      ido-confirm-unique-completion t) ; wait for RET, even with unique completion
+
+;;----------------------------------------------------
+
 
 ;;------------ eshell ----------------------
-
-
-;; (defun eshell/clear ()
-;;   (interactive)
-;;   (let ((inhibit-read-only t))
-;;     (erase-buffer)))
 
 (defun clear-shell ()
    (interactive)
@@ -168,8 +153,6 @@
      (setq comint-buffer-maximum-size 0)
      (comint-truncate-buffer)
      (setq comint-buffer-maximum-size (+ 1 old-max))))
-
-
 
 ;; -----------------------------------------
 
@@ -199,6 +182,7 @@
 (global-set-key (kbd "C-c C-k") 'kill-region)
 (global-set-key (kbd "C-c \\") 'balance-windows)
 
+(setq ignBufferList '("*Messages*" "*scratch*" "*Help*"))
 
 (defun next-buff ()
   "In selected window switch to next buffer."
@@ -206,8 +190,7 @@
   (if (window-minibuffer-p)
       (error "Cannot switch buffers in minibuffer window"))
   (switch-to-next-buffer)
-
-  (if (or (string-equal (buffer-name) "*Messages*") (string-equal (buffer-name) "*scratch*")) (next-buff)))
+  (if (member buffer-name ignBufferList) (next-buff)))
 
 (defun prev-buff ()
   "In selected window switch to previous buffer."
@@ -215,8 +198,7 @@
   (if (window-minibuffer-p)
       (error "Cannot switch buffers in minibuffer window"))
   (switch-to-prev-buffer)
-    (if (or (string-equal (buffer-name) "*Messages*") (string-equal (buffer-name) "*scratch*")) (prev-buff)))
-
+  (if (member buffer-name ignBufferList) (prev-buff)))
 
 
 ;;from http://www.youtube.com/watch?v=a-jRN_ba41w
@@ -236,9 +218,10 @@
 (global-unset-key (kbd "C-x 0")) ; was delete-window
 (global-unset-key (kbd "C-x o")) ; was other-window
 
-;; speed i need speed
-(global-set-key (kbd "C-<right>") 'next-buff)
-(global-set-key (kbd "C-<left>") 'prev-buff)
+;; switch quickly between buffers
+(global-set-key (kbd "C-<left>") 'switch-to-next-buffer)
+(global-set-key (kbd "C-<right>") 'switch-to-prev-buffer)
+
 (global-set-key (kbd "M-k") 'kill-this-buffer)
 
 ;; unbind cmd-k
@@ -248,16 +231,7 @@
 (global-unset-key (kbd "C-x <right>"))
 (global-unset-key (kbd "C-x <left>"))
 
-
-
-
-
-
 (defun delete-current-buffer () (interactive) (kill-buffer (current-buffer)))
-
-
-
-
 
 ;;-----------Emacs Debug----------------
 
@@ -272,14 +246,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(unless (require 'el-get nil t)
-(url-retrieve
- "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
- (lambda (s)
-   (let (el-get-master-branch)
-     (end-of-buffer)
-     (eval-print-last-sexp)))))
-
+(require 'ruby-mode)
 ;;ruby-mode hook
 (defun ruby-mode-hook ()
   (autoload 'ruby-mode "ruby-mode" nil t)
@@ -296,6 +263,7 @@
                                (require 'inf-ruby)
                                (require 'ruby-compilation))))
 
+(require 'rhtml-mode)
 (defun rhtml-mode-hook ()
   (autoload 'rhtml-mode "rhtml-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
@@ -303,50 +271,11 @@
   (add-hook 'rhtml-mode '(lambda ()
                            (define-key rhtml-mode-map (kbd "M-s") 'save-buffer))))
 
+(require 'yaml-mode)
 (defun yaml-mode-hook ()
   (autoload 'yaml-mode "yaml-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
-
-
-
-;; local sources
-(setq el-get-sources
-      '((:name magit
-               :after (lambda () (global-set-key (kbd "C-x C-z") 'magit-status)))
-	(:name yaml-mode 
-               :type git
-               :url "http://github.com/yoshiki/yaml-mode.git"
-               :features yaml-mode
-               :after (lambda () (yaml-mode-hook)))
-	(:name rvm
-               :type git
-               :url "http://github.com/djwhitt/rvm.el.git"
-               :load "rvm.el"
-               :compile ("rvm.el")
-               :after (lambda() (rvm-use-default)))
-	(:name rhtml
-               :type git
-               :url "https://github.com/eschulte/rhtml.git"
-               :features rhtml-mode
-	       :after (lambda () (rhtml-mode-hook)))
-	(:name ecb_snap
-               :type elpa)
-	
-	(:name yasnippet
-	       :type elpa)
-	
-	(:name anything
-	       :type git
-	       :url "git://repo.or.cz/anything-config.git")
-
-	))
-        
-(setq my-packages
-      (append
-       (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
-
-(el-get 'sync my-packages)
 
 ;;ecb/cedet
 (global-ede-mode 1)                      ; Enable the Project management system
@@ -360,8 +289,6 @@
 (setq stack-trace-on-error t)
 
 ;;----------------------Obligatory Elisp----------------------------------------------------
-
-
 
 (defun fc-eval-and-replace ()
   "Replace the preceding sexp with its value."
@@ -441,9 +368,6 @@
 
 (setq eshell-prompt-regexp "^[^ϟ]* [ϟ] ")
 
-;; Use Emacs terminfo, not system terminfo
-(setq system-uses-terminfo nil)
-
 
 ;; advice function - look into how these work
  (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
@@ -476,25 +400,13 @@
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
 
-;;anything.el
+;;anything.el (now helm.el)
 
-(add-to-list 'load-path "~/.emacs.d/el-get/anything")
-(require 'anything-match-plugin)
-(require 'anything-config)
 
 
 ;;pdf
 (setq auto-mode-alist (cons '("\\.pdf$" . doc-view-mode) auto-mode-alist))
 (setq exec-path (append exec-path '("/usr/local/bin/gs")))
-
-
-(defun quit-and-kill-window()
- "quit and kill window"  
- (interactive)
- (quit-window "KILL"))
-
-(load-file "~/Dropbox/bin/dotfiles/dotemacs/window.el")
-
 
 ;;add unix newline to end of file
 (setq require-final-newline t)
@@ -626,4 +538,73 @@
 (set-face-attribute 'mode-line-80col-face nil
     :inherit 'mode-line-position-face
     :foreground "black" :background "#eab700")
+
+
+
+;;---------------------------------------------------------------------
+;; ibuffer
+
+(require 'ibuffer) 
+(setq ibuffer-saved-filter-groups
+  (quote (("default"      
+            ("Org" ;; all org-related buffers
+              (mode . org-mode))  
+            ("Mail"
+              (or  ;; mail-related buffers
+               (mode . message-mode)
+               (mode . mail-mode)
+               ;; etc.; all your mail related modes
+               ))
+            ("Programming" ;; prog stuff not already in MyProjectX
+              (or
+                (mode . c-mode)
+                (mode . perl-mode)
+                (mode . python-mode)
+                (mode . emacs-lisp-mode)
+                ;; etc
+                )) 
+            ("ERC"   (mode . erc-mode))
+	    ("Consoles" 
+	     (mode . term-mode)
+	     )))))
+
+(add-hook 'ibuffer-mode-hook
+  (lambda ()
+    (ibuffer-switch-to-saved-filter-groups "default")))
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+
+;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "New name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file name new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
+
+
+;; magit
+(require 'magit)
+
+
+
+
+
+
+
+
+
+
+
+
+(load "~/Dropbox/bin/dotfiles/dotemacs/lisp/linum-mod.el")
 

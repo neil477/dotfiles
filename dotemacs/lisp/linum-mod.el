@@ -200,5 +200,5 @@ and you have to scroll or press C-l to update the numbers."
 (defun linum-after-config ()
   (walk-windows (lambda (w) (linum-update (window-buffer w))) nil 'visible))
 
-(provide 'linum)
+(provide 'linum-mode)
 ;;; linum.el ends here
