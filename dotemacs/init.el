@@ -60,13 +60,10 @@
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-;; Line Numbers - modified version of linum to view line numbers up to current line
-;;(require 'linum-mode)
-
 ;; Turn linum mode off for eshell and minor modes
 (require 'linum-off)  
-  (column-number-mode 1)  ;; Line numbers on left most column1
-  (global-linum-mode 1)
+(column-number-mode 1)  ;; Line numbers on left most column
+(global-linum-mode 1)
 
 ;;package manager stuff
 (require 'package);
@@ -89,7 +86,7 @@
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2)))
 
 ;;load theme DONT PUT IN "-theme" part of name 
-(load-theme 'zenburn t)
+(load-theme 'tomorrow-night t)
 
 (setq server-host (system-name)
                 server-use-tcp t)
@@ -596,13 +593,6 @@
 
 ;; magit
 (require 'magit)
-
-
-
-
-
-
-
 
 
 
