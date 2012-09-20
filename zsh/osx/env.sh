@@ -32,9 +32,6 @@ export PATH="$HOME/Library/Haskell/bin:$PATH"
 # rvm stuff
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
-export USERWM=`which xmonad`
-# export TERM="urxvt"
-
 #node version manager
-. ~/nvm/nvm.sh
+. $HOME/nvm/nvm.sh
 
