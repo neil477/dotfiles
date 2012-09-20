@@ -7,6 +7,20 @@
 (load "subdirs.el")
 (cd "~")
 
+;; Use Emacs terminfo, not system terminfo
+(setq system-uses-terminfo nil)
+
+;;linum mode
+(column-number-mode 1)  ;; Line numbers on left most column
+(global-linum-mode 1)
+
+(load "~/Dropbox/bin/dotfiles/dotemacs/lisp/linum-mod.el")
+
+;; Turn linum mode off for eshell and minor modes
+(require 'linum-off)
+
+;; unique buffers
+(require 'uniquify)
 
 (add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/site-lisp")
 (add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/lisp")
@@ -15,10 +29,8 @@
 ;;(load-file "~/Dropbox/bin/dotfiles/dotemacs/osxstuff.el")
 (require 'osxstuff.el)
 
-
 ;;term stuff
-;;(load-file "~/Dropbox/bin/dotfiles/dotemacs/ansi-term.el")
-(require 'ansi-term.el)
+(require 'ansi-term)
 
 ;;Remove annoying splash screen
 (setq inhibit-splash-screen t)
@@ -46,14 +58,34 @@
 (setq transient-mark-mode t)
 
 ;;--------------------------------------------------------------------------------
-;; todo
+;; TODO
 
 
 ;;load smart tabs stolen from https://github.com/rmm5t
 ;;(load "tabs")
 
-;;hippie mode To
+;;hippie mode
 ;;(global-set-key (kbd "TAB") 'hippie-expand)
+
+
+;; Org Mode
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(setq org-log-done t)
+
+(setq org-agenda-files (list "~/Dropbox/test.org"))
+
+
+;; erc
+
+;; (setq erc-prompt-for-nickserv-password nil)
+;; (setq erc-nickserv-identify-mode 'autodetect)
+;; (load "~/.emacs.d/.erc-auth.el") ; erc-password
+;; (setq erc-prompt-for-nickserv-password nil)
+;; (erc :server "irc.freenode.net" :nick erc-username  :password erc-password)
+;; (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#erc" "#python"))))
 
 ;;--------------------------------------------------------------------------------
 
@@ -62,11 +94,6 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-;; Turn linum mode off for eshell and minor modes
-(require 'linum-off)  
-(column-number-mode 1)  ;; Line numbers on left most column
-(global-linum-mode 1)
 
 ;;package manager stuff
 (require 'package);
@@ -82,14 +109,8 @@
 
 (add-to-list 'custom-theme-load-path  "~/Dropbox/bin/dotfiles/dotemacs/themes/tomorrow-theme")
 
-(custom-set-variables
- '(custom-safe-themes (quote ("e9704e8b957e4151cd570c5f25ec81c297aa2b6a" "517aecb1202bfa31fd3c44473d72483c5166124d" default)))
- '(ecb-layout-name "left13")
- '(ecb-options-version "2.40")
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2)))
-
 ;;load theme DONT PUT IN "-theme" part of name 
-(load-theme 'tomorrow-night t)
+(load-theme 'Tamary t)
 
 (setq server-host (system-name)
                 server-use-tcp t)
@@ -114,7 +135,6 @@
 
 ;;disable menubar,toolbar,scrollbar
 (menu-bar-mode -1) 
-
 (if (functionp 'tool-bar-mode) (tool-bar-mode -1))
 
 ;;--------------ido mode ------------------------------
@@ -167,38 +187,64 @@
 
 
 ;;buffer-menu to current window
-(global-set-key "\C-x\C-b" 'buffer-menu)
+(global-set-key "\C-x \C-b" 'buffer-menu)
 
 ;;keybindings
-(global-set-key (kbd "C-c e") 'ecb-activate)
-(global-set-key (kbd "C-c d") 'ecb-deactivate)
+(global-set-key (kbd "\C-c e") 'ecb-activate)
+(global-set-key (kbd "\C-c d") 'ecb-deactivate)
 
-(global-set-key (kbd "C-h C-f") 'find-function)
-(global-set-key (kbd "C-c C-w") 'kill-buffer-and-window)
-(global-set-key (kbd "C-c C-e") 'eval-buffer)
-(global-set-key (kbd "C-c C-s") '(lambda () (interactive) (ansi-term "/bin/zsh")))
-(global-set-key (kbd "C-w") 'backward-kill-word)
-(global-set-key (kbd "C-x C-k") 'kill-region)
-(global-set-key (kbd "C-c C-k") 'kill-region)
-(global-set-key (kbd "C-c \\") 'balance-windows)
+(global-set-key (kbd "\C-h C-f") 'find-function)
+(global-set-key (kbd "\C-c C-w") 'kill-buffer-and-window)
+(global-set-key (kbd "\C-c C-e") 'eval-buffer)
+(global-set-key (kbd "\C-c C-s") '(lambda () (interactive) (ansi-term "/bin/zsh")))
+(global-set-key (kbd "\C-w") 'backward-kill-word)
+(global-set-key (kbd "\C-x C-k") 'kill-region) ;;todo
+(global-set-key (kbd "\C-c C-k") 'kill-region) ;;todo
+(global-set-key (kbd "\C-c \\") 'balance-windows)
 
-(setq ignBufferList '("*Messages*" "*scratch*" "*Help*"))
+(global-set-key (kbd "\M-g") 'goto-line)
 
-(defun next-buff ()
-  "In selected window switch to next buffer."
+
+
+;;from http://ergoemacs.org/emacs/effective_emacs.html
+
+(defun next-user-buffer ()
+  "Switch to the next user buffer.
+User buffers are those whose name does not start with *."
   (interactive)
-  (if (window-minibuffer-p)
-      (error "Cannot switch buffers in minibuffer window"))
-  (switch-to-next-buffer)
-  (if (member buffer-name ignBufferList) (next-buff)))
+  (next-buffer)
+  (let ((i 0))
+    (while (and (string-match "^*" (buffer-name)) (< i 50))
+      (setq i (1+ i)) (next-buffer) )))
 
-(defun prev-buff ()
-  "In selected window switch to previous buffer."
+(defun previous-user-buffer ()
+  "Switch to the previous user buffer.
+User buffers are those whose name does not start with *."
   (interactive)
-  (if (window-minibuffer-p)
-      (error "Cannot switch buffers in minibuffer window"))
-  (switch-to-prev-buffer)
-  (if (member buffer-name ignBufferList) (prev-buff)))
+  (previous-buffer)
+  (let ((i 0))
+    (while (and (string-match "^*" (buffer-name)) (< i 50))
+      (setq i (1+ i)) (previous-buffer) )))
+
+(defun next-emacs-buffer ()
+  "Switch to the next emacs buffer.
+Emacs buffers are those whose name starts with *."
+  (interactive)
+  (next-buffer)
+  (let ((i 0))
+    (while (and (not (string-match "^*" (buffer-name))) (< i 50))
+      (setq i (1+ i)) (next-buffer) )))
+
+(defun previous-emacs-buffer ()
+  "Switch to the previous emacs buffer.
+Emacs buffers are those whose name starts with *."
+  (interactive)
+  (previous-buffer)
+  (let ((i 0))
+    (while (and (not (string-match "^*" (buffer-name))) (< i 50))
+      (setq i (1+ i)) (previous-buffer) )))
+
+
 
 
 ;;from http://www.youtube.com/watch?v=a-jRN_ba41w
@@ -219,8 +265,10 @@
 (global-unset-key (kbd "C-x o")) ; was other-window
 
 ;; switch quickly between buffers
-(global-set-key (kbd "C-<left>") 'switch-to-next-buffer)
-(global-set-key (kbd "C-<right>") 'switch-to-prev-buffer)
+(global-set-key (kbd "C-<left>") 'previous-user-buffer)
+(global-set-key (kbd "C-<right>") 'next-user-buffer)
+(global-set-key (kbd "s-<left>") 'previous-emacs-buffer)
+(global-set-key (kbd "s-<right>") 'next-emacs-buffer)
 
 (global-set-key (kbd "M-k") 'kill-this-buffer)
 
@@ -324,24 +372,6 @@
 (visual-line-mode 1)
 
 
-;;------------------ Org Mode ------------------------------------------------------------
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(setq org-log-done t)
-
-(setq org-agenda-files (list "~/Dropbox/test.org"))
-
-
-;;-------------------erc------------------------------------------------------------------
-
-;; (setq erc-prompt-for-nickserv-password nil)
-;; (setq erc-nickserv-identify-mode 'autodetect)
-;; (load "~/.emacs.d/.erc-auth.el") ; erc-password
-;; (setq erc-prompt-for-nickserv-password nil)
-;; (erc :server "irc.freenode.net" :nick erc-username  :password erc-password)
-;; (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#erc" "#python"))))
 
 
 ;;;==================== Window Management ===========================================

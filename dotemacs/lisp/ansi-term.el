@@ -1,5 +1,3 @@
-(provide 'ansi-term.el)
-
 ;; Use Emacs terminfo, not system terminfo
 (setq system-uses-terminfo nil)
 
@@ -22,3 +20,5 @@
 ;; (define-key (term-mode-map) (kbd "s-v") nil)
 
 ;; (define-key term-mode-map (kbd "s-v") 'term-paste)
+
+(provide 'ansi-term)
