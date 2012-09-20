@@ -4,6 +4,4 @@ alias em="~/Dropbox/bin/dotfiles/scripts/emacsclienthelper.sh"
 alias ctags="/usr/local/bin/ctags"
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias tabnm="~/Dropbox/bin/dotfiles/scripts/tabnm.sh"
-
-
-
+alias dirs="dirs -v"
