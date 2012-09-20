@@ -19,7 +19,7 @@ export DISABLE_AUTO_TITLE="true"
 
 # Plugins to load (plugins can be found in ~/.oh-my-zsh/plugins/*)                                           
 # Example format: plugins=(rails git textmate ruby lighthouse)                  
-plugins=(git)
+plugins=(git rails3 rvm ruby osx heroku github brew gem gnu-utils node npm redis-cli)
 
 source $ZSH/oh-my-zsh.sh
 
