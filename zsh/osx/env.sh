@@ -4,6 +4,8 @@ export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 # Path to your oh-my-zsh configuration.                                         
 export ZSH=$HOME/.oh-my-zsh
 
+export ZSH_CUSTOM=$HOME/Dropbox/bin/dotfiles/zsh/oh-my-zsh-custom
+
 # Set name of the theme to load.                                               
 export ZSH_THEME="weatherby"
 
