@@ -1,18 +1,13 @@
-;; Base16 Tamary (https://github.com/chriskempson/base16)
+
+
+;; Base16 Tomorrow (https://github.com/chriskempson/base16)
 ;; Scheme: Chris Kempson (http://chriskempson.com)
 
-;;; Tamary-theme.el --- custom theme for faces
-
-;;; Commentary:
-;;
-;; Originally by Chris Kempson https://github.com/ChrisKempson/Tomorrow-Theme
-;; Ported to GNU Emacs by Chris Charles
-;; Ported to GNU Emacs 24's built-in theme system by Jim Myhrberg (@jimeh)
+;;; base16-tomorrow-theme.el
 
 ;;; Code:
 
-
-(deftheme Tamary "The Zenburn color theme")
+(deftheme base16-tomorrow)
 
 (let ((background "#282a2e")
       (current-line "#969896")
@@ -28,8 +23,8 @@
       (blue "#81a2be")
       (purple "#b294bb"))
 
-  (custom-theme-set-faces
-   'Tamary
+  (custom-theme-set-faces 
+   'base16-tomorrow
 
    ;; Built-in stuff (Emacs 23)
    `(default ((t (:background ,background :foreground ,foreground))))
@@ -78,7 +73,7 @@
    `(rainbow-delimiters-depth-9-face ((t (:foreground ,foreground)))))
 
   (custom-theme-set-variables
-   'Tamary
+   'base16-tomorrow
 
    `(ansi-color-names-vector
      ;; black, red, green, yellow, blue, magenta, cyan, white
@@ -87,6 +82,6 @@
      ;; black, red, green, yellow, blue, magenta, cyan, white
      [unspecified ,background ,red ,green ,yellow ,blue ,purple ,blue ,foreground])))
 
-(provide-theme 'Tamary)
+(provide-theme 'base16-tomorrow)
 
-;;; Tamary-theme.el ends here
+;;; base16-tomorrow-theme.el ends here

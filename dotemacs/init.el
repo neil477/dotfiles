@@ -110,7 +110,7 @@
 (add-to-list 'custom-theme-load-path  "~/Dropbox/bin/dotfiles/dotemacs/themes/tomorrow-theme")
 
 ;;load theme DONT PUT IN "-theme" part of name 
-(load-theme 'Tamary t)
+(load-theme 'base16-tomorrow t)
 
 (setq server-host (system-name)
                 server-use-tcp t)
