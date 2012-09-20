@@ -4,3 +4,24 @@
 [submodule "zsh/oh-my-zsh"]
 	path = zsh/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "dotemacs/site-lisp/yaml-mode"]
+	path = dotemacs/site-lisp/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git
+[submodule "dotemacs/site-lisp/inf-ruby"]
+	path = dotemacs/site-lisp/inf-ruby
+	url = https://github.com/nonsequitur/inf-ruby.git
+[submodule "dotemacs/site-lisp/magit"]
+	path = dotemacs/site-lisp/magit
+	url = https://github.com/magit/magit.git
+[submodule "dotemacs/site-lisp/helm"]
+	path = dotemacs/site-lisp/helm
+	url = https://github.com/emacs-helm/helm.git
+[submodule "dotemacs/site-lisp/rvm"]
+	path = dotemacs/site-lisp/rvm
+	url = https://github.com/senny/rvm.el.git
+[submodule "dotemacs/site-lisp/rhtml"]
+	path = dotemacs/site-lisp/rhtml
+	url = https://github.com/eschulte/rhtml.git
+[submodule "dotemacs/site-lisp/expand-region"]
+	path = dotemacs/site-lisp/expand-region
+	url = https://github.com/magnars/expand-region.el.git

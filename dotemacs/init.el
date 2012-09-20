@@ -246,47 +246,46 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(require 'ruby-mode)
-;;ruby-mode hook
-(defun ruby-mode-hook ()
-  (autoload 'ruby-mode "ruby-mode" nil t)
-  (add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-  (add-hook 'ruby-mode-hook '(lambda ()
-                               (setq ruby-deep-arglist t)
-                               (setq ruby-deep-indent-paren nil)
-                               (setq c-tab-always-indent nil)
-                               (require 'inf-ruby)
-                               (require 'ruby-compilation))))
 
-(require 'rhtml-mode)
-(defun rhtml-mode-hook ()
-  (autoload 'rhtml-mode "rhtml-mode" nil t)
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
-  (add-to-list 'auto-mode-alist '("\\.rjs\\'" . rhtml-mode))
-  (add-hook 'rhtml-mode '(lambda ()
-                           (define-key rhtml-mode-map (kbd "M-s") 'save-buffer))))
+;;----------------ruby stuff------------------------------------------------------
+
+
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
+
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rjs\\'" . ruby-mode))
+
+;; for repl
+(require 'inf-ruby)
+
+(autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
+(autoload 'inf-ruby-setup-keybindings "inf-ruby" "" t)
+(eval-after-load 'ruby-mode
+  '(add-hook 'ruby-mode-hook 'inf-ruby-setup-keybindings))
+
 
 (require 'yaml-mode)
-(defun yaml-mode-hook ()
-  (autoload 'yaml-mode "yaml-mode" nil t)
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
+;;--------------------------------------------------------------------------------
 ;;ecb/cedet
-(global-ede-mode 1)                      ; Enable the Project management system
 
-;;Remove that damned ecb tip of the day
-(setq ecb-tip-of-the-day nil)
+(global-ede-mode 1)                      ;; Enable the Project management system
 
-(setq ecb-version-check nil)
-
-; Need for ECB in emacs 24
-(setq stack-trace-on-error t)
+(setq ecb-tip-of-the-day nil         ;;Remove that damned ecb tip of the day
+      ecb-version-check nil
+      stack-trace-on-error t
+      ecb-layout-name "left13"
+      ecb-options-version "2.40"
+      ecb-primary-secondary-mouse-buttons '(quote mouse-1--mouse-2))
 
 ;;----------------------Obligatory Elisp----------------------------------------------------
 
@@ -403,8 +402,7 @@
 ;;anything.el (now helm.el)
 (require 'helm-config)
 (global-set-key (kbd "C-c h") 'helm-mini)
-
-
+(helm-mode 1)
 
 ;;pdf
 (setq auto-mode-alist (cons '("\\.pdf$" . doc-view-mode) auto-mode-alist))
@@ -491,6 +489,19 @@
 
 
 
+;--------------------------------------------------------------------------------
+;;Emacs Help And Documentation
 
+;; Make docs more pretty to read.
+;; display horizontal line for the Form Feed char (ASCII 12, ^L) The
+;; Form Feed char is often used in elisp source code for marking
+;; sections. The command forward-page (and backward-page) moves to the
+;; next form feed char.
+(require 'pp-c-l)
+(setq pp^L-^L-string "                                                           ")
+(pretty-control-l-mode 1)
 
-(load "~/Dropbox/bin/dotfiles/dotemacs/lisp/linum-mod.el")
+;--------------------------------------------------------------------------------
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
