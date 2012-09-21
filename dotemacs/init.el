@@ -331,6 +331,14 @@ Emacs buffers are those whose name starts with *."
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
 
 ;;--------------------------------------------------------------------------------
+
+;;markdown mode
+(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+(setq auto-mode-alist (cons '("\\.text" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+
+
+
 ;;ecb/cedet
 
 (global-ede-mode 1)                      ;; Enable the Project management system
