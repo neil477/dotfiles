@@ -25,3 +25,6 @@
 [submodule "dotemacs/site-lisp/expand-region"]
 	path = dotemacs/site-lisp/expand-region
 	url = https://github.com/magnars/expand-region.el.git
+[submodule "dotemacs/site-lisp/scss-mode"]
+	path = dotemacs/site-lisp/scss-mode
+	url = https://github.com/antonj/scss-mode

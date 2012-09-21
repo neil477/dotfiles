@@ -323,6 +323,13 @@ Emacs buffers are those whose name starts with *."
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
+
+(setq exec-path (cons (expand-file-name "/Users/neil/.rvm/gems/ruby-1.9.3-rc1/bin") exec-path))
+
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
+
 ;;--------------------------------------------------------------------------------
 ;;ecb/cedet
 
