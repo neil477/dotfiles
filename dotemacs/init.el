@@ -118,7 +118,7 @@
 ;; Disable fringes ie the big ass margin separator
 ;; notice this if statement detects if you're in gui mode
 ;; Start the emacs server
-(if window-system
+(if (display-graphic-p)
     (progn
       (scroll-bar-mode -1)
        (fringe-mode 0)
@@ -375,7 +375,7 @@ Emacs buffers are those whose name starts with *."
         (save-buffers-kill-emacs))
     (message "Canceled exit")))
 
-(when window-system
+(when (display-graphic-p)
   (global-set-key (kbd "C-x C-c") 'ask-before-closing))
 
 ;; TODO unobtrusive bell in modeline
