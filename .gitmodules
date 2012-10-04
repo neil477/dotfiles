@@ -31,3 +31,6 @@
 [submodule "dotemacs/site-lisp/markdown-mode"]
 	path = dotemacs/site-lisp/markdown-mode
 	url = git://jblevins.org/git/markdown-mode.git
+[submodule "dotemacs/site-lisp/nxhtml"]
+	path = dotemacs/site-lisp/nxhtml
+	url = git://github.com/emacsmirror/nxhtml.git

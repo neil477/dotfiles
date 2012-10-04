@@ -550,3 +550,8 @@ Emacs buffers are those whose name starts with *."
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;--------------------------------------------------------------------------------
+(require 're-builder)
+(setq reb-re-syntax 'string)
+;--------------------------------------------------------------------------------
+(load "~/Dropbox/bin/dotfiles/dotemacs/site-lisp/nxhtml/autostart.el")
