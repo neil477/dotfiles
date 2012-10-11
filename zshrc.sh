@@ -4,14 +4,14 @@ unamestr=`uname`
 
 if [ "$(uname)" = 'Darwin' ];
   then
-source $HOME/Dropbox/bin/dotfiles/zsh/osx/env.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/osx/config.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/osx/aliases.sh 
-source $HOME/Dropbox/bin/dotfiles/scripts/
+source $PRE/dotfiles/zsh/osx/env.sh
+source $PRE/dotfiles/zsh/osx/config.sh
+source $PRE/dotfiles/zsh/osx/aliases.sh 
+source $PRE/dotfiles/scripts/
 elif [ "$(uname)" = 'Linux' ];
   then
-source $HOME/Dropbox/bin/dotfiles/zsh/nix/env.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/nix/config.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/nix/aliases.sh 
+source $PRE/dotfiles/zsh/nix/env.sh
+source $PRE/dotfiles/zsh/nix/config.sh
+source $PRE/dotfiles/zsh/nix/aliases.sh 
 fi
 
