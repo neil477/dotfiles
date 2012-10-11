@@ -1,0 +1,3 @@
+(setq emacs-base-path "~/Dropbox/bin/dotfiles/dotemacs")
+
+(load (format "%s/%s" emacs-base-path "init.el"))
