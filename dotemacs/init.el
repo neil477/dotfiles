@@ -2,19 +2,19 @@
 (require 'cl)
 
 ;;setup load-path
-(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs")
-(cd "~/Dropbox/bin/dotfiles/dotemacs")
+(add-to-list 'load-path emacs-base-path)
+(cd emacs-base-path)
 (load "subdirs.el")
 (cd "~")
 
 ;; Use Emacs terminfo, not system terminfo
 (setq system-uses-terminfo nil)
 
-;;linum mode
+;; linum mode
 (column-number-mode 1)  ;; Line numbers on left most column
 (global-linum-mode 1)
 
-(load "~/Dropbox/bin/dotfiles/dotemacs/lisp/linum-mod.el")
+(load (format "%s/%s" emacs-base-path "lisp/linum-mod.el"))
 
 ;; Turn linum mode off for eshell and minor modes
 (require 'linum-off)
@@ -22,11 +22,10 @@
 ;; unique buffers
 (require 'uniquify)
 
-(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/site-lisp")
-(add-to-list 'load-path "~/Dropbox/bin/dotfiles/dotemacs/lisp")
+(add-to-list 'load-path (format "%s/%s" emacs-base-path "site-lisp"))
+(add-to-list 'load-path (format "%s/%s" emacs-base-path "lisp"))
 
 ;;load osx specific stuff
-;;(load-file "~/Dropbox/bin/dotfiles/dotemacs/osxstuff.el")
 (require 'osxstuff.el)
 
 ;;term stuff
@@ -105,9 +104,9 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-(add-to-list 'custom-theme-load-path "~/Dropbox/bin/dotfiles/dotemacs/themes")
+(add-to-list 'custom-theme-load-path (format "%s/%s" emacs-base-path "themes"))
 
-(add-to-list 'custom-theme-load-path  "~/Dropbox/bin/dotfiles/dotemacs/themes/tomorrow-theme")
+(add-to-list 'custom-theme-load-path  (format "%s/%s" emacs-base-path "themes/tomorrow-theme"))
 
 ;;load theme DONT PUT IN "-theme" part of name 
 (load-theme 'base16-tomorrow t)
@@ -554,4 +553,4 @@ Emacs buffers are those whose name starts with *."
 (require 're-builder)
 (setq reb-re-syntax 'string)
 ;--------------------------------------------------------------------------------
-(load "~/Dropbox/bin/dotfiles/dotemacs/site-lisp/nxhtml/autostart.el")
+(load (format "%s/%s" emacs-base-path "site-lisp/nxhtml/autostart.el"))
