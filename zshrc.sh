@@ -2,8 +2,8 @@
 
 unamestr=`uname`
 
-export ZSH=$HOME/Dropbox/bin/dotfiles/zsh/oh-my-zsh
-export ZSH_CUSTOM=$HOME/Dropbox/bin/dotfiles/zsh/oh-my-zsh-custom
+export ZSH=$PRE/dotfiles/zsh/oh-my-zsh
+export ZSH_CUSTOM=$PRE/dotfiles/zsh/oh-my-zsh-custom
 export ZSH_THEME="weatherby"
 export DISABLE_AUTO_UPDATE="true"
 export DISABLE_AUTO_TITLE="true"
@@ -14,14 +14,14 @@ source $ZSH/oh-my-zsh.sh
 
 if [ "$(uname)" = 'Darwin' ];
   then
-source $HOME/Dropbox/bin/dotfiles/zsh/osx/env.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/osx/config.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/osx/aliases.sh 
-source $HOME/Dropbox/bin/dotfiles/scripts/
+source $PRE/dotfiles/zsh/osx/env.sh
+source $PRE/dotfiles/zsh/osx/config.sh
+source $PRE/dotfiles/zsh/osx/aliases.sh 
+source $PRE/dotfiles/scripts/
 elif [ "$(uname)" = 'Linux' ];
   then
-source $HOME/Dropbox/bin/dotfiles/zsh/nix/env.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/nix/config.sh
-source $HOME/Dropbox/bin/dotfiles/zsh/nix/aliases.sh 
+source $PRE/dotfiles/zsh/nix/env.sh
+source $PRE/dotfiles/zsh/nix/config.sh
+source $PRE/dotfiles/zsh/nix/aliases.sh 
 fi
 
