@@ -145,8 +145,11 @@
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
 
+(if (not (file-exists-p "~/.emacs.d/cache/"))
+    (make-directory "~/.emacs.d/cache"))
+
 ;; http://www.emacswiki.org/cgi-bin/wiki/InteractivelyDoThings
-(setq ido-save-directory-list-file "~/Dropbox/.emacs.d/cache/ido.last"
+(setq ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
       ido-ignore-buffers ;; ignore these guys
       '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace" "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
       ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
