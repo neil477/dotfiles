@@ -2,8 +2,8 @@
 
 unamestr=`uname`
 
-export ZSH=$HOME/Dropbox/bin/dotfiles/zsh/oh-my-zsh
-export ZSH_CUSTOM=$HOME/Dropbox/bin/dotfiles/zsh/oh-my-zsh-custom
+export ZSH=$PRE/dotfiles/zsh/oh-my-zsh
+export ZSH_CUSTOM=$PRE/dotfiles/zsh/oh-my-zsh-custom
 export ZSH_THEME="weatherby"
 export DISABLE_AUTO_UPDATE="true"
 export DISABLE_AUTO_TITLE="true"
