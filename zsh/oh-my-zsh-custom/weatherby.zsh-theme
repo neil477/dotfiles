@@ -11,13 +11,14 @@ function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
 
-# Save a smiley to a local variable if the last command exited with success.
+# Save a lightning bolt to a local variable if the last command exited with success.
 local bolt="%(?,%{$fg[yellow]%}ϟ%{$reset_color%},%{$fg[red]%}ϟ%{$reset_color%})"
+
 
 # Show the relative path on one line, then the smiley.
 PROMPT='
 %~$(git_com)
-${bolt}  %{$reset_color%}'
+%{$fg[red]%}[$HOST]%{$reset_color%}${bolt}  %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[green]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
